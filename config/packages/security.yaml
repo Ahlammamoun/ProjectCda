@@ -1,39 +1,55 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_MANAGER, ROLE_USER]
+        ROLE_MANAGER: [ROLE_USER]
+
+    # Hashage des mots de passe
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    # Gestion des utilisateurs (provider)
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            access_denied_url: /login  # Rediriger vers la page de connexion si un accès est refusé
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            # Formulaire de connexion
+            form_login:
+                login_path: login   # Chemin pour afficher le formulaire de connexion
+                check_path: login   # Chemin pour vérifier l'identité de l'utilisateur (soumission du formulaire)
+                username_parameter: email  # Nom du champ pour l'email
+                password_parameter: password  # Nom du champ pour le mot de passe
+            logout:
+                path: /logout
+                target: /
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Contrôle d'accès pour les routes sécurisées
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+   # Autoriser la lecture à tout le monde (authentifié ou non)
+        # - { path: '^/courses/\d+', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: '^/courses', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Autoriser certaines actions aux rôles spécifiques
+        - { path: '^/courses/new', roles: ROLE_ADMIN }
+        - { path: '^/courses/\d+/edit', roles: ROLE_MANAGER }
+        - { path: '^/courses/\d+/delete', roles: ROLE_ADMIN }
 
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

@@ -9,25 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController  extends AbstractController
 {
-    #[Route('/')]
-    public function number(): Response
+    #[Route('/', name: 'home')]
+    public function index(): Response
     {
-        $number = (rand(0, 100));
-        return $this->render('base.html.twig', [
-
-
-            'number' => $number,
-        ]);
-    }
-
-    #[Route('/test')]
-    public function test(): Response
-    {
-        $number = (rand(0, 100));
-        return $this->render('base.html.twig', [
-
-
-            'number' => $number,
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
         ]);
     }
 

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+
+    <h2>Leçons</h2>
+    <ul>
+        {% for lesson in course.lessons %}
+            <li>{{ lesson.title }}</li>
+        {% else %}
+            <li>Aucune leçon disponible.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Quiz</h2>
+    <ul>
+        {% for quiz in course.quizzes %}
+            <li>{{ quiz.question }}</li>
+        {% else %}
+            <li>Aucun quiz disponible.</li>
+        {% endfor %}
+    </ul>
+
+    {% if is_granted('ROLE_MANAGER') %}
+        <a href="{{ path('course_edit', {id: course.id}) }}" class="btn btn-primary">Modifier</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <form method="post" action="{{ path('course_delete', {id: course.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce cours ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ course.id) }}">
+            <button class="btn btn-danger">Supprimer</button>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -3,3 +3,137 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+# Route pour afficher la liste des cours
+course_index:
+    path: /courses
+    controller: App\Controller\CourseController::index
+
+# Route pour afficher le détail d'un cours
+course_show:
+    path: /courses/{id}
+    controller: App\Controller\CourseController::show
+    requirements:
+        id: \d+
+
+# Route pour créer un nouveau cours
+course_new:
+    path: /courses/new
+    controller: App\Controller\CourseController::new
+
+# Route pour modifier un cours existant
+course_edit:
+    path: /courses/{id}/edit
+    controller: App\Controller\CourseController::edit
+    requirements:
+        id: \d+
+
+# Route pour supprimer un cours
+course_delete:
+    path: /courses/{id}/delete
+    controller: App\Controller\CourseController::delete
+    methods: [POST] # Généralement, on utilise POST pour la suppression
+    requirements:
+        id: \d+
+
+
+# Route pour afficher les leçons d'un cours
+lesson_index:
+    path: /courses/{course_id}/lessons
+    controller: App\Controller\LessonController::index
+    requirements:
+        course_id: \d+
+
+# Route pour afficher une leçon spécifique
+lesson_show:
+    path: /courses/{course_id}/lessons/{id}
+    controller: App\Controller\LessonController::show
+    requirements:
+        id: \d+
+        course_id: \d+
+
+# Route pour ajouter une nouvelle leçon à un cours
+lesson_new:
+    path: /courses/{course_id}/lessons/new
+    controller: App\Controller\LessonController::new
+    requirements:
+        course_id: \d+
+
+# Route pour modifier une leçon
+lesson_edit:
+    path: /courses/{course_id}/lessons/{id}/edit
+    controller: App\Controller\LessonController::edit
+    requirements:
+        id: \d+
+        course_id: \d+
+
+# Route pour supprimer une leçon
+lesson_delete:
+    path: /courses/{course_id}/lessons/{id}/delete
+    controller: App\Controller\LessonController::delete
+    methods: [POST]
+    requirements:
+        id: \d+
+        course_id: \d+
+
+
+# Route pour afficher les quiz d'un cours
+quiz_index:
+    path: /courses/{course_id}/quizzes
+    controller: App\Controller\QuizController::index
+    requirements:
+        course_id: \d+
+
+# Route pour afficher un quiz spécifique
+quiz_show:
+    path: /courses/{course_id}/quizzes/{id}
+    controller: App\Controller\QuizController::show
+    requirements:
+        id: \d+
+        course_id: \d+
+
+# Route pour créer un nouveau quiz
+quiz_new:
+    path: /courses/{course_id}/quizzes/new
+    controller: App\Controller\QuizController::new
+    requirements:
+        course_id: \d+
+
+# Route pour modifier un quiz
+quiz_edit:
+    path: /courses/{course_id}/quizzes/{id}/edit
+    controller: App\Controller\QuizController::edit
+    requirements:
+        id: \d+
+        course_id: \d+
+
+# Route pour supprimer un quiz
+quiz_delete:
+    path: /courses/{course_id}/quizzes/{id}/delete
+    controller: App\Controller\QuizController::delete
+    methods: [POST]
+    requirements:
+        id: \d+
+        course_id: \d+
+
+
+# Route pour afficher les certificats d'un étudiant
+certificate_index:
+    path: /certificates
+    controller: App\Controller\CertificateController::index
+
+# Route pour afficher un certificat spécifique
+certificate_show:
+    path: /certificates/{id}
+    controller: App\Controller\CertificateController::show
+    requirements:
+        id: \d+
+
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+logout:
+    path: /logout
