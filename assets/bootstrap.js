@@ -1,5 +1,5 @@
-import { startStimulusApp } from '@symfony/stimulus-bundle';
+// assets/bootstrap.js
 
-const app = startStimulusApp();
-// register any custom, 3rd party controllers here
-// app.register('some_controller_name', SomeImportedController);
+// Import any needed CSS or JS files
+import './styles/app.css';
+import './app.js'; // S'il y a un fichier JS principal

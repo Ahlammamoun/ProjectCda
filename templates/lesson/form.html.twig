@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if lesson.id %}
+        Modifier la leçon : {{ lesson.title }}
+    {% else %}
+        Ajouter une nouvelle leçon
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-title">
+        {% if lesson.id %}
+            Modifier la leçon : {{ lesson.title }}
+        {% else %}
+            Ajouter une nouvelle leçon
+        {% endif %}
+    </h1>
+
+    <div class="form-container">
+        {{ form_start(form, {'attr': {'class': 'custom-form'}}) }}
+            <div class="form-group">
+                {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+                <div class="form-field">
+                    {{ form_widget(form.title, {'attr': {'class': 'input-text'}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
+                <div class="form-field">
+                    {{ form_widget(form.content, {'attr': {'class': 'input-text'}}) }}
+                </div>
+            </div>
+            <button class="button button-success">
+                {% if lesson.id %}
+                    Mettre à jour
+                {% else %}
+                    Ajouter la leçon
+                {% endif %}
+            </button>
+        {{ form_end(form) }}
+    </div>
+
+    <a href="{{ path('lesson_index', {course_id: lesson.course.id}) }}" class="button button-secondary">Retour à la liste des leçons</a>
+{% endblock %}

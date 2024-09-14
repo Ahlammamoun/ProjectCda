@@ -1,0 +1,249 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+    color: whitesmoke;
+}
+
+p {
+    margin-bottom: 20px;
+    color: whitesmoke;
+}
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+span.title {
+    color: rgb(110, 18, 18);
+    font-family: ui-monospace;
+    border: solid 2px black;
+}
+.container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 75px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+footer.footer {
+    text-align: center;
+    /* text-decoration: none; */
+    border-top: solid 1px rgb(110, 18, 18) ;
+}
+/* Navbar */
+.navbar {
+    background-color: black;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px rgb(110, 18, 18);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+}
+
+.navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar .navbar-nav {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+}
+
+.navbar .nav-item {
+    margin-left: 20px;
+}
+
+.navbar .nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+    text-decoration: underline;
+}
+
+.logout-link {
+    color: #ff6666;
+}
+a.button.button-info {
+    border: solid 1px whitesmoke;
+    color: black;
+    background-color: green;
+    width: 60px;
+}
+a.button.button-primary {
+    border: solid 1px whitesmoke;
+    background-color: rgb(110, 18, 18);
+    color: black;
+    width: 60px;
+}
+a.button.button-success {
+    border: solid 1px whitesmoke;
+    color: black;
+    background-color: green;
+}
+button.button.button-danger {
+    background-color: black;
+    border: solid 1px whitesmoke;
+    color: whitesmoke;
+    width: 91px;
+}
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.button-green {
+    background-color: green;
+    color: white;
+    border: none;
+    width: 60px;
+}
+
+.button-red {
+    background-color: rgb(110, 18, 18);
+    color: white;
+    border: none;
+}
+
+.button-blue {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.button-secondary {
+    background-color: rgb(110, 18, 18);
+    color: whitesmoke;
+    border: none;
+}
+
+.button:hover {
+    opacity: 0.85;
+}
+
+/* Table */
+.course-table, .lesson-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.course-table th, .lesson-table th, .course-table td, .lesson-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    color: whitesmoke;
+}
+
+.course-table th, .lesson-table th {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-text {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    background-color: black;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: solid 1px whitesmoke;
+    color: whitesmoke;
+}
+
+/* Specific page styles */
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.lesson-actions {
+    margin-top: 20px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+/* Styles for the homepage */
+.homepage-banner {
+    text-align: center;
+    padding: 50px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.homepage-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.homepage-description {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* Button styles */
+.custom-button {
+    display: inline-block;
+    padding: 15px;
+    font-size: 1.2em;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(110, 18, 18);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+

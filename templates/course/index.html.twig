@@ -1,35 +1,49 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Liste des cours{% endblock %}
+
 {% block body %}
-    <h1>Liste des cours</h1>
+    <h1 class="page-title">Liste des cours</h1>
 
-    <ul>
-        {% for course in courses %}
-            <li>
-                <h2>{{ course.title }}</h2>
-                <p>{{ course.description }}</p>
+    <table class="course-table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course.title }}</td>
+                    <td>{{ course.description }}</td>
+                    <td>
+                        <a href="{{ path('course_show', {id: course.id}) }}" class="button button-info">Voir</a>
 
-                <!-- Bouton Voir (toujours visible) -->
-                <a href="{{ path('course_show', {id: course.id}) }}" class="btn btn-info">Voir</a>
+                        {% if is_granted('ROLE_MANAGER') %}
+                            <a href="{{ path('course_edit', {id: course.id}) }}" class="button button-primary">Modifier</a>
+                        {% endif %}
 
-                <!-- Bouton Modifier (uniquement pour ROLE_MANAGER et ROLE_ADMIN) -->
-                {% if is_granted('ROLE_MANAGER') %}
-                    <a href="{{ path('course_edit', {id: course.id}) }}" class="btn btn-primary">Modifier</a>
-                {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <form method="post" action="{{ path('course_delete', {id: course.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce cours ?');" style="display:inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ course.id) }}">
+                                <button class="button button-danger">Supprimer</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun cours disponible.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-                <!-- Bouton Supprimer (uniquement pour ROLE_ADMIN) -->
-                {% if is_granted('ROLE_ADMIN') %}
-                    <form method="post" action="{{ path('course_delete', {id: course.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce cours ?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ course.id) }}">
-                        <button class="btn btn-danger">Supprimer</button>
-                    </form>
-                {% endif %}
-            </li>
-        {% else %}
-            <li>Aucun cours disponible.</li>
-        {% endfor %}
-    </ul>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('course_new') }}" class="button button-success">Ajouter un nouveau cours</a>
+    {% endif %}
 {% endblock %}
-
 
 

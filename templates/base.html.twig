@@ -4,48 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mon site{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+    {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Mon Site</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            {% if app.user %}
-                <!-- Afficher le nom de l'utilisateur et son rôle -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Utilisateur : {{ app.user.email }} (Rôle : 
-                        {% if is_granted('ROLE_ADMIN') %}
-                            Admin
-                        {% elseif is_granted('ROLE_MANAGER') %}
-                            Manager
-                        {% else %}
-                            Utilisateur
-                        {% endif %}
-                        )
-                    </a>
-                </li>
-
-                <!-- Bouton Déconnexion -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
-                </li>
-            {% else %}
-                <!-- Bouton Connexion (affiché uniquement si non connecté) -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('login') }}">Connexion</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
+<nav class="navbar">
+    <a class="navbar-brand" href="{{ path('home') }}">Mon Site</a>
+    <ul class="navbar-nav">
+        {% if app.user %}
+            <li class="nav-item">
+                <span class="nav-user-info">
+                    Utilisateur : {{ app.user.email }} (Rôle : 
+                    {% if is_granted('ROLE_ADMIN') %}
+                        Admin
+                    {% elseif is_granted('ROLE_MANAGER') %}
+                        Manager
+                    {% else %}
+                        Utilisateur
+                    {% endif %}
+                    )
+                </span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link logout-link" href="{{ path('logout') }}">Déconnexion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('login') }}">Connexion</a>
+            </li>
+        {% endif %}
+    </ul>
 </nav>
 
-    <div class="container mt-4">
-        {% block body %}{% endblock %}
-    </div>
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; {{ "now"|date("Y") }} Mon Site. Tous droits réservés.</p>
+        <nav class="footer-nav">
+            <a href="{{ path('home') }}">Accueil</a> |
+            <a href="{{ path('contact') }}">Contact</a>
+        </nav>
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('/app.js') }}"></script>
+{% endblock %}
 </body>
 </html>

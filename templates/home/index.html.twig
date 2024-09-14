@@ -3,9 +3,9 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div class="jumbotron text-center">
-        <h1>Bienvenue sur notre plateforme d'apprentissage</h1>
-        <p>C'est ici que vous trouverez les meilleurs cours en ligne pour améliorer vos compétences.</p>
-        <a href="{{ path('course_index') }}" class="btn btn-primary">Voir les cours</a>
+    <div class="homepage-banner">
+        <h1 class="homepage-title">Bienvenue sur notre plateforme </br><span class="title">Studi Now</span></h1>
+        <p class="homepage-description">C'est ici que vous trouverez les meilleurs cours en ligne pour améliorer vos compétences.</p>
+        <a href="{{ path('course_index') }}" class="custom-button red-button full-width">Voir les cours</a>
     </div>
 {% endblock %}

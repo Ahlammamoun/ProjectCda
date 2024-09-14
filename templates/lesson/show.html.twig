@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leçon : {{ lesson.title }}{% endblock %}
+
+{% block body %}
+    <h1 class="page-title">Détail du cours : {{ course.title }}</h1>
+    <p class="course-description">{{ course.description }}</p>
+
+    <h2>Détail de la leçon</h2>
+    <table class="course-table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Contenu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ lesson.title }}</td>
+                <td>{{ lesson.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Boutons d'action (modifier et supprimer) -->
+    <div class="lesson-actions">
+        {% if is_granted('ROLE_MANAGER') %}
+            <a href="{{ path('lesson_edit', {course_id: course.id, id: lesson.id}) }}" class="button button-primary">Modifier</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <form method="post" action="{{ path('lesson_delete', {course_id: course.id, id: lesson.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette leçon ?');" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lesson.id) }}">
+                <button class="button button-danger">Supprimer</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <a href="{{ path('lesson_index', {course_id: course.id}) }}" class="button button-secondary">Retour aux leçons</a>
+{% endblock %}
+
+
