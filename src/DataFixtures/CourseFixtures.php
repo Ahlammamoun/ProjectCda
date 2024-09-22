@@ -19,13 +19,19 @@ class CourseFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // Création d'un utilisateur qui sera l'enseignant
-        $teacher = new User();
-        $teacher->setEmail('teacher@example.com');
-        $teacher->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
-        $teacher->setPassword($this->passwordHasher->hashPassword($teacher, 'password123'));
+        // Vérifier si l'enseignant existe déjà pour éviter les doublons
+        $existingTeacher = $manager->getRepository(User::class)->findOneBy(['email' => 'teacher@example.com']);
 
-        $manager->persist($teacher);
+        if (!$existingTeacher) {
+            // Création d'un utilisateur qui sera l'enseignant
+            $teacher = new User();
+            $teacher->setEmail('teacher@example.com');
+            $teacher->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+            $teacher->setPassword($this->passwordHasher->hashPassword($teacher, 'password123'));
+            $manager->persist($teacher);
+        } else {
+            $teacher = $existingTeacher;
+        }
 
         // Exemple de création de 3 cours
         for ($i = 1; $i <= 3; $i++) {

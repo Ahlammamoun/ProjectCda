@@ -3,19 +3,24 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+    <h1 class="form-title">Connexion</h1>
 
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login') }}"  method="post">
-        <label for="email">Email :</label>
-        <input type="text" id="email" name="email" value="{{ last_username }}" required>
+    <form action="{{ path('login') }}" method="post" class="login-form">
+        <div class="form-group">
+            <label for="email" class="form-label">Email :</label>
+            <input type="text" id="email" name="email" value="{{ last_username }}" required class="form-input">
+        </div>
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
+        <div class="form-group">
+            <label for="password" class="form-label">Mot de passe :</label>
+            <input type="password" id="password" name="password" required class="form-input">
+        </div>
 
-        <button type="submit">Se connecter</button>
+        <button type="submit" class="form-button">Se connecter</button>
     </form>
 {% endblock %}
+

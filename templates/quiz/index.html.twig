@@ -1,0 +1,16 @@
+{# templates/quiz/index.html.twig #}
+
+<h1>Liste des quizzes pour le cours {{ course.title }}</h1>
+
+<ul>
+    {% for quiz in quizzes %}
+        <li>
+            <strong>{{ quiz.title }}</strong>
+            <a href="{{ path('quiz_answer', { 'course_id': course.id, 'id': quiz.id }) }}">Répondre au quiz</a>
+        </li>
+    {% else %}
+        <li>Aucun quiz trouvé pour ce cours.</li>
+    {% endfor %}
+</ul>
+
+

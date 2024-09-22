@@ -21,6 +21,9 @@
                     <td>
                         <a href="{{ path('course_show', {id: course.id}) }}" class="button button-info">Voir</a>
 
+                        {# Lien pour accéder à la liste des quizzes du cours #}
+                        <a href="{{ path('quiz_index', {course_id: course.id}) }}" class="button button-secondary">Voir les quizzes</a>
+
                         {% if is_granted('ROLE_MANAGER') %}
                             <a href="{{ path('course_edit', {id: course.id}) }}" class="button button-primary">Modifier</a>
                         {% endif %}

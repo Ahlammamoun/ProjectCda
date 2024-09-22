@@ -17,11 +17,11 @@ class LessonType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextType::class)
-            ->add('course', EntityType::class, [
-                'class' => Course::class,
-                'choice_label' => 'title',  // Ou n'importe quel autre champ pour afficher
-                'disabled' => true, // Désactiver ce champ si tu associes directement la leçon au cours
-            ]);
+            ->add('content', TextType::class);
+            // ->add('course', EntityType::class, [
+            //     'class' => Course::class,
+            //     'choice_label' => 'title',  // Ou n'importe quel autre champ pour afficher
+            //     'disabled' => true, // Désactiver ce champ si tu associes directement la leçon au cours
+            // ]);
     }
 }

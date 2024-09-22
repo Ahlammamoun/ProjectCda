@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -18,10 +19,15 @@ class Quiz
     private ?Course $course = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $question = null;
+    private ?string $title = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $answer = null;
+    #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: QuizQuestion::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $quizQuestions;
+
+    public function __construct()
+    {
+        $this->quizQuestions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -39,25 +45,40 @@ class Quiz
         return $this;
     }
 
-    public function getQuestion(): ?string
+    public function getTitle(): ?string
     {
-        return $this->question;
+        return $this->title;
     }
 
-    public function setQuestion(string $question): self
+    public function setTitle(string $title): self
     {
-        $this->question = $question;
+        $this->title = $title;
         return $this;
     }
 
-    public function getAnswer(): ?string
+    public function getQuizQuestions(): Collection
     {
-        return $this->answer;
+        return $this->quizQuestions;
     }
 
-    public function setAnswer(string $answer): self
+    public function addQuizQuestion(QuizQuestion $quizQuestion): self
     {
-        $this->answer = $answer;
+        if (!$this->quizQuestions->contains($quizQuestion)) {
+            $this->quizQuestions[] = $quizQuestion;
+            $quizQuestion->setQuiz($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizQuestion(QuizQuestion $quizQuestion): self
+    {
+        if ($this->quizQuestions->removeElement($quizQuestion)) {
+            if ($quizQuestion->getQuiz() === $this) {
+                $quizQuestion->setQuiz(null);
+            }
+        }
+
         return $this;
     }
 }

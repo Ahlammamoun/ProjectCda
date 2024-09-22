@@ -2,23 +2,25 @@
 
 namespace App\Form;
 
+use App\Entity\QuizQuestion;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class QuizzeType extends AbstractType
+class QuizQuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('field_name')
-        ;
+            ->add('question', TextType::class, ['label' => 'Question'])
+            ->add('correctAnswer', TextType::class, ['label' => 'Réponse correcte']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => QuizQuestion::class,
         ]);
     }
 }

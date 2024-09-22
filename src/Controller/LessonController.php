@@ -92,6 +92,7 @@ class LessonController extends AbstractController
         return $this->render('lesson/form.html.twig', [
             'lesson' => $lesson,
             'form' => $form->createView(),
+            'course' => $lesson->getCourse(),  // Ajout du cours
         ]);
     }
 

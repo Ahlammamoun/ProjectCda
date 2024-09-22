@@ -13,17 +13,18 @@ class LessonFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         // Ajouter 5 leçons pour chaque cours
-        for ($i = 1; $i <= 5; $i++) {
-            $lesson = new Lesson();
-            $lesson->setTitle('Leçon ' . $i);
-            $lesson->setContent('Contenu de la leçon ' . $i);
+        for ($courseIndex = 1; $courseIndex <= 3; $courseIndex++) {
+            $course = $this->getReference('course_' . $courseIndex); // Récupérer la référence de chaque cours
 
-            // Associer à un cours existant
-            /** @var Course $course */
-            $course = $this->getReference('course_1'); // Référence d'un cours créé dans CourseFixtures
-            $lesson->setCourse($course);
+            for ($i = 1; $i <= 5; $i++) {
+                $lesson = new Lesson();
+                $lesson->setTitle('Leçon ' . $i . ' du cours ' . $courseIndex);
+                $lesson->setContent('Contenu de la leçon ' . $i);
 
-            $manager->persist($lesson);
+                $lesson->setCourse($course); // Associer la leçon au cours
+
+                $manager->persist($lesson);
+            }
         }
 
         $manager->flush();

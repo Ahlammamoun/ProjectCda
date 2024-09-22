@@ -1,0 +1,26 @@
+{# templates/quiz/quiz_answer.html.twig #}
+
+<h1>Répondez aux questions du quiz : {{ quiz.title }}</h1>
+
+{{ form_start(form) }}
+
+{% for answerField in form.answers %}
+    <div>
+        {# Affiche la question correspondante en utilisant loop.index #}
+        <p>{{ questions[loop.index].question }}</p>
+        {{ form_row(answerField) }} {# Affiche le champ de réponse #}
+    </div>
+{% else %}
+    <p>Aucune question trouvée.</p>
+{% endfor %}
+
+<button type="submit">Soumettre les réponses</button>
+
+{{ form_end(form) }}
+
+
+
+
+
+
+

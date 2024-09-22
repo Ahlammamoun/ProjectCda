@@ -1,0 +1,7 @@
+{# templates/quiz/result.html.twig #}
+
+<h1>Résultats pour le quiz : {{ quiz.title }}</h1>
+
+<p>Vous avez obtenu un score de {{ score }} sur {{ total }}.</p>
+
+<a href="{{ path('course_quiz', {course_id: quiz.getCourse().id}) }}">Reprendre le quiz</a>

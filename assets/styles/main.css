@@ -20,7 +20,7 @@ p {
 }
 a {
     text-decoration: none;
-    color: whitesmoke;
+    color: rgb(110, 18, 18);
 }
 span.title {
     color: rgb(110, 18, 18);
@@ -50,7 +50,7 @@ footer.footer {
 }
 
 .navbar a {
-    color: white;
+    color: rgb(110, 18, 18);
     text-decoration: none;
     padding: 8px 16px;
 }
@@ -58,6 +58,7 @@ footer.footer {
 .navbar .navbar-brand {
     font-weight: bold;
     font-size: 20px;
+    color: rgb(110, 18, 18);
 }
 
 .navbar .navbar-nav {
@@ -71,8 +72,9 @@ footer.footer {
 }
 
 .navbar .nav-link {
-    color: white;
+    color: rgb(110, 18, 18);
     text-decoration: none;
+    font-weight: bold;
 }
 
 .navbar .nav-link:hover {
@@ -80,7 +82,8 @@ footer.footer {
 }
 
 .logout-link {
-    color: #ff6666;
+    color: rgb(110, 18, 18);
+    font-weight: bold;
 }
 a.button.button-info {
     border: solid 1px whitesmoke;
@@ -102,7 +105,7 @@ a.button.button-success {
 button.button.button-danger {
     background-color: black;
     border: solid 1px whitesmoke;
-    color: whitesmoke;
+    color: rgb(110, 18, 18);
     width: 91px;
 }
 /* Buttons */
@@ -138,8 +141,10 @@ button.button.button-danger {
 
 .button-secondary {
     background-color: rgb(110, 18, 18);
-    color: whitesmoke;
+    color: black;
     border: none;
+    width: 60px;
+    border: solid 1px whitesmoke;
 }
 
 .button:hover {
@@ -254,9 +259,26 @@ button.button.button-danger {
     margin-left: 10px;
     vertical-align: middle;
 }
-/* 
-form {
-    color: white;
+
+form.login-form {
+    padding-bottom: 200px;
     border: solid 1px rgb(110, 18, 18);
-    padding: 40px;
-} */
+    display: flex;
+    justify-content: space-evenly;
+}
+.form-group {
+   
+    margin: 30px;
+}
+button.form-button {
+    height: 24px;
+    margin: 50px;
+    background-color: rgb(110, 18, 18);
+}
+label.form-label {
+    color: rgb(110, 18, 18);
+}
+
+button.button.button-success {
+    background-color: green;
+}
