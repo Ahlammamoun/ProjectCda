@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\QuizAnswer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,21 +16,17 @@ class QuizAnswerType extends AbstractType
     {
         $questions = $options['questions'];
 
-        // Vérifier que les questions existent et créer des champs correspondants
-        if (!empty($questions)) {
-            $builder->add('answers', CollectionType::class, [
-                'entry_type' => TextType::class,  // Chaque réponse est un champ texte
-                'entry_options' => [
-                    'label' => false,  // On gère le label dans le template
-                ],
-                'allow_add' => false,  // Pas d'ajout dynamique
-                'mapped' => false,  // Cette collection n'est pas mappée à une propriété directe
+        foreach ($questions as $index => $question) {
+            $builder->add('answer_' . $index, TextType::class, [
+                'label' => $question->getQuestion(), // Utiliser la question comme label
+                'mapped' => false,  // Indique que ce champ n'est pas lié à une entité
             ]);
         }
     }
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([]);
-        $resolver->setRequired('questions');  // On s'assure que les questions sont passées dans les options
+        $resolver->setRequired('questions');  
     }
 }

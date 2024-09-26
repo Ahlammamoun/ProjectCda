@@ -1,22 +1,74 @@
-{# templates/quiz/quiz_answer.html.twig #}
+{% extends 'base.html.twig' %}
 
+{% block body %}
 <h1>Répondez aux questions du quiz : {{ quiz.title }}</h1>
 
-{{ form_start(form) }}
-
-{% for answerField in form.answers %}
-    <div>
-        {# Affiche la question correspondante en utilisant loop.index #}
-        <p>{{ questions[loop.index].question }}</p>
-        {{ form_row(answerField) }} {# Affiche le champ de réponse #}
-    </div>
-{% else %}
-    <p>Aucune question trouvée.</p>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
 {% endfor %}
 
-<button type="submit">Soumettre les réponses</button>
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
 
-{{ form_end(form) }}
+<div class="quiz-form"> {# Ajoutez une classe ici pour le formulaire #}
+    {{ form_start(form, {'method': 'POST'}) }}
+
+    {% for field in form %}
+        <div>
+            {{ form_label(field) }}
+            {{ form_widget(field, {'attr': {'class': 'form-control'}}) }} {# Classe Bootstrap pour le style #}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Soumettre les réponses</button>
+    <a href="{{ path('quiz_reset', {'course_id': quiz.course.id, 'id': quiz.id}) }}" class="btn btn-secondary">Réinitialiser</a>
+    {# Ajout du bouton de réinitialisation #}
+
+    {# Bouton de retour vers la liste des quizzes #}
+    <a href="{{ path('quiz_index', {'course_id': quiz.course.id}) }}" class="btn btn-secondary">Retour</a>
+
+    {{ form_end(form) }} {# Pas d'options ici, mais le formulaire est contenu dans la div #}
+</div>
+
+{% if answers is not empty %}
+    <h2>Résultats</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Votre Réponse</th>
+                <th>Réponse Correcte</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for answer in answers %}
+                <tr>
+                    <td>{{ answer.question }}</td>
+                    <td>{{ answer.userAnswer }}</td>
+                    <td>{{ answer.correctAnswer }}</td>
+                    <td>{{ answer.isCorrect ? 'Correct' : 'Incorrect' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

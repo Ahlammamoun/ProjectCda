@@ -12,15 +12,19 @@ class QuizQuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('question', TextType::class, ['label' => 'Question'])
-            ->add('correctAnswer', TextType::class, ['label' => 'Réponse correcte']);
+        $questions = $options['questions'];
+
+        foreach ($questions as $index => $question) {
+            $builder->add('answer_' . $index, TextType::class, [
+                'label' => $question->getQuestion(), // Utiliser la question comme label
+                'mapped' => false,  // Indique que ce champ n'est pas lié à une entité
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => QuizQuestion::class,
-        ]);
+        $resolver->setDefaults([]);
+        $resolver->setRequired('questions');  
     }
 }

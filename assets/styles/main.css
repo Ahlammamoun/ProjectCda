@@ -91,6 +91,11 @@ a.button.button-info {
     background-color: green;
     width: 60px;
 }
+a.btn.btn-secondary {
+    border: solid 1px rgb(40, 38, 38);
+    background-color: rgb(110, 18, 18);
+    color: black;
+}
 a.button.button-primary {
     border: solid 1px whitesmoke;
     background-color: rgb(110, 18, 18);
@@ -102,11 +107,23 @@ a.button.button-success {
     color: black;
     background-color: green;
 }
+button.btn.btn-primary {
+    background-color: rgb(110, 18, 18);
+    color: black;
+   
+}
 button.button.button-danger {
     background-color: black;
     border: solid 1px whitesmoke;
     color: rgb(110, 18, 18);
     width: 91px;
+}
+td {
+    border: solid 1px rgb(110, 18, 18);
+    color: whitesmoke;
+}
+thead {
+    color: whitesmoke;
 }
 /* Buttons */
 .button {
@@ -224,7 +241,15 @@ button.button.button-danger {
     max-width: 800px;
     border: solid 5px rgb(110, 18, 18);
 }
+.quiz-form {
+    border: solid 1px rgb(110, 18, 18);
+    padding: 40px;
+}
 
+input#quiz_answer_answer_0 {
+    width: 100%;
+    background-color: whitesmoke;
+}
 .homepage-title {
     font-size: 2.5em;
     margin-bottom: 20px;
@@ -281,4 +306,11 @@ label.form-label {
 
 button.button.button-success {
     background-color: green;
+}
+
+label.required {
+    color: whitesmoke;
+}
+.alert.alert-success {
+    color: whitesmoke;
 }

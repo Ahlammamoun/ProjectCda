@@ -1,5 +1,6 @@
-{# templates/quiz/index.html.twig #}
+{% extends 'base.html.twig' %}
 
+{% block body %}
 <h1>Liste des quizzes pour le cours {{ course.title }}</h1>
 
 <ul>
@@ -12,5 +13,10 @@
         <li>Aucun quiz trouvé pour ce cours.</li>
     {% endfor %}
 </ul>
+
+{# Bouton pour retourner à la liste des cours #}
+<a href="{{ path('course_index') }}" class="btn btn-secondary">Retour à la liste des cours</a>
+
+{% endblock %}
 
 

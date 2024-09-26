@@ -1,7 +1,37 @@
-{# templates/quiz/quiz_result.html.twig #}
+{% extends 'base.html.twig' %}
 
-<h1>Résultat du quiz : {{ quiz.title }}</h1>
+{% block body %}
+<h1>Résultats du quiz : {{ quiz.title }}</h1>
 
-<p>Votre score est de {{ score }} sur {{ total }}.</p>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
 
-<a href="{{ path('quiz_index', { 'course_id': course_id }) }}">Retour aux quizzes</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Votre Réponse</th>
+            <th>Réponse Correcte</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for answer in answers %}
+            <tr>
+                <td>{{ answer.question }}</td>
+                <td>{{ answer.userAnswer }}</td>
+                <td>{{ answer.correctAnswer }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune réponse trouvée.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('quiz_index', {'course_id': quiz.course.id}) }}" class="btn btn-secondary">Retour aux quizzes</a>
+{% endblock %}
+
+
+
