@@ -1,0 +1,13 @@
+{# templates/question/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Modifier la question pour le quiz : {{ quiz.title }}</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Modifier la question</button>
+{{ form_end(form) }}
+
+<a href="{{ path('quiz_question_index', {quiz_id: quiz.id, course_id: quiz.course.id}) }}" class="btn btn-secondary">Retour à la liste des questions</a>
+{% endblock %}

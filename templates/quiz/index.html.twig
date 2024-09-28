@@ -8,11 +8,20 @@
         <li>
             <strong>{{ quiz.title }}</strong>
             <a href="{{ path('quiz_answer', { 'course_id': course.id, 'id': quiz.id }) }}">Répondre au quiz</a>
+            <a href="{{ path('quiz_show', { 'course_id': course.id, 'id': quiz.id }) }}" class="btn btn-info">Voir le quiz</a>
+      <a href="{{ path('quiz_edit', { course_id: course.id, id: quiz.id }) }}" class="btn btn-warning">Modifier</a>
+            <form action="{{ path('quiz_delete', { 'course_id': course.id, 'id': quiz.id }) }}" method="post" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ quiz.id) }}">
+                <button class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce quiz ?');">Supprimer</button>
+            </form>
         </li>
     {% else %}
         <li>Aucun quiz trouvé pour ce cours.</li>
     {% endfor %}
 </ul>
+
+{# Bouton pour ajouter un nouveau quiz #}
+<a href="{{ path('quiz_new', { 'course_id': course.id }) }}" class="btn btn-success">Ajouter un nouveau quiz</a>
 
 {# Bouton pour retourner à la liste des cours #}
 <a href="{{ path('course_index') }}" class="btn btn-secondary">Retour à la liste des cours</a>

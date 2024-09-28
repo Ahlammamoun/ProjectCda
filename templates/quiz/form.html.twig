@@ -1,26 +1,22 @@
-{# templates/quiz/form.html.twig #}
+{% extends 'base.html.twig' %}
 
-<h1>{% if quiz.id %}Modifier le quiz pour {{ course.title }}{% else %}Créer un nouveau quiz pour {{ course.title }}{% endif %}</h1>
+{% block body %}
+<h1>{% if question.id %}Modifier{% else %}Ajouter{% endif %} une question</h1>
 
 {{ form_start(form) }}
-
-<div>
-    {{ form_label(form.question) }}
-    {{ form_widget(form.question) }}
-    {{ form_errors(form.question) }}
-</div>
-
-<div>
-    {{ form_label(form.answer) }}
-    {{ form_widget(form.answer) }}
-    {{ form_errors(form.answer) }}
-</div>
-
-<button type="submit">{{ button_label|default('Sauvegarder') }}</button>
-
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">
+        {% if question.id %}Modifier{% else %}Ajouter{% endif %} la question
+    </button>
 {{ form_end(form) }}
 
-<a href="{{ path('quiz_index', { 'course_id': course.id }) }}">Retour à la liste des quizzes</a>
+<a href="{{ path('quiz_question_index', { course_id: quiz.id, quiz_id: question.getQuiz().id }) }}" class="btn btn-secondary">Retour à la liste des questions</a>
+{% endblock %}
+
+
+
+
+
 
 
 

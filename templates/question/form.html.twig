@@ -1,9 +1,0 @@
-{# templates/question/form.html.twig #}
-
-<h1>{% if quiz %}Ajouter une nouvelle question{% else %}Modifier la question{% endif %} pour {{ quiz.title }}</h1>
-
-{{ form_start(form) }}
-    {{ form_row(form.question) }}
-    {{ form_row(form.correctAnswer) }}
-    <button type="submit">Sauvegarder</button>
-{{ form_end(form) }}
