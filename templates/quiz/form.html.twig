@@ -10,7 +10,7 @@
     </button>
 {{ form_end(form) }}
 
-<a href="{{ path('quiz_question_index', { course_id: quiz.id, quiz_id: question.getQuiz().id }) }}" class="btn btn-secondary">Retour à la liste des questions</a>
+<a href="{{ path('quiz_question_index', { course_id: quiz.id, quiz_id: question.getQuiz().id }) }}" class="btn btn-secondary"><span>⬅</span></a>
 {% endblock %}
 
 

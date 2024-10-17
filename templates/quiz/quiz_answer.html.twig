@@ -26,7 +26,7 @@
     {# Ajout du bouton de réinitialisation #}
 
     {# Bouton de retour vers la liste des quizzes #}
-    <a href="{{ path('quiz_index', {'course_id': quiz.course.id}) }}" class="btn btn-secondary">Retour</a>
+    <a href="{{ path('quiz_index', {'course_id': quiz.course.id}) }}" class="btn btn-secondary"><span>⬅</span></a>
 
     {{ form_end(form) }} {# Pas d'options ici, mais le formulaire est contenu dans la div #}
 </div>

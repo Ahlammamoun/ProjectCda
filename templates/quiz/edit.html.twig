@@ -9,5 +9,5 @@
     <button type="submit" class="btn btn-primary">Modifier la question</button>
 {{ form_end(form) }}
 
-<a href="{{ path('quiz_question_index', {quiz_id: quiz.id, course_id: quiz.course.id}) }}" class="btn btn-secondary">Retour à la liste des questions</a>
+<a href="{{ path('quiz_question_index', {quiz_id: quiz.id, course_id: quiz.course.id}) }}" class="btn btn-secondary"><span>⬅</span></a>
 {% endblock %}
